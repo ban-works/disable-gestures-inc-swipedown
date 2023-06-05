@@ -14,11 +14,13 @@ function enable() {
     let disableDemaximizingWindow = () => {
         global.stage.get_actions().forEach(a => { if (a != this) a.enabled = false;});
     }
-    global.display.connect('notify::focus-window', disableDemaximizingWindow);
-    global.display.connect('in-fullscreen-changed', disableDemaximizingWindow);
+    focusWindow = global.display.connect('notify::focus-window', disableDemaximizingWindow);
+    inFullScreenChanged = global.display.connect('in-fullscreen-changed', disableDemaximizingWindow);
 }
 
 // When the extension is disabled, enable the gestures
 function disable() {
 	global.stage.get_actions().forEach(a => a.enabled = true);
+    global.display.disconnect(focusWindow);
+    global.display.disconnect(inFullScreenChanged);
 }
