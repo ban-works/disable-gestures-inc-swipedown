@@ -6,6 +6,8 @@
  * Thanks to Matt Bell 2016 who provided the base extension disable-gestures
  * Thanks to StackExchange (superuser.com) question #1542018 response by alex
  */
+let focusWindow = null;
+let inFullScreenChanged = null
 
 // When the extension is enabled, disable the gestures
 function enable() {
